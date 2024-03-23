@@ -1,17 +1,17 @@
 package user
 
 import (
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/models"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 type DataBase interface {
-	AddNewUser(user models.User) (err error)
+	CreateUser(user models.User) (err error)
 	GetAllUsers() (users []models.User, err error)
 	GetUserById(id int) (user models.User, err error)
-	Update(user models.User) (err error)
-	Delete(idUser int) (err error)
+	UpdateUserById(user models.User) (err error)
+	DeleteUserById(idUser int) (err error)
 }
 
 type postgres struct {

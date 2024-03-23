@@ -1,8 +1,10 @@
 package order
 
-import "FlowerHive/db-microservice/pkg/models"
+import (
+	"github.com/aashpv/db-microservice/pkg/models"
+)
 
-func (p *postgres) Create(order models.Order) (err error) {
+func (p *postgres) CreateOrder(order models.Order) (err error) {
 	_, err = p.db.Exec("INSERT INTO user (date, status, id_product, id_user, address, other_number, other_name) VALUES ($1, $2, $3, $4, $5, $6, $7)",
 		order.Date,
 		order.Status,

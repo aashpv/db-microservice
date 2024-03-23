@@ -1,7 +1,7 @@
 package product
 
 import (
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/models"
 )
 
 func (p *postgres) GetAllProducts() (products []models.Product, err error) {

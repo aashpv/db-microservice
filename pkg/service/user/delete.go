@@ -1,7 +1,7 @@
 package user
 
-func (s *service) Delete(id int) (err error) {
-	err = s.pgs.Delete(id)
+func (s *service) DeleteUserById(id int) (err error) {
+	err = s.pgs.DeleteUserById(id)
 	if err != nil { // if err use log for writing in file
 		return
 	}

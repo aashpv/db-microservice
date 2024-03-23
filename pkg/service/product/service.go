@@ -1,16 +1,16 @@
 package product
 
 import (
-	"FlowerHive/db-microservice/pkg/db/product"
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/db/product"
+	"github.com/aashpv/db-microservice/pkg/models"
 )
 
 type Service interface {
-	Create(body string) (err error)
-	Update(body string) (err error)
-	GetProduct(id int) (product models.Product, err error)
-	GetAllProduct() (products []models.Product, err error)
-	Delete(id int) (err error)
+	CreateProduct(body string) (err error)
+	UpdateProductById(body string) (err error)
+	GetProductById(id int) (product models.Product, err error)
+	GetAllProducts() (products []models.Product, err error)
+	DeleteProductById(id int) (err error)
 }
 
 type service struct {

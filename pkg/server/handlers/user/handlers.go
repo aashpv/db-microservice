@@ -1,7 +1,7 @@
 package user
 
 import (
-	"FlowerHive/db-microservice/pkg/service/user"
+	"github.com/aashpv/db-microservice/pkg/service/user"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -10,7 +10,7 @@ import (
 func GetAllUsers(c *gin.Context) {
 	var s user.Service
 
-	users, err := s.GetAllUser()
+	users, err := s.GetAllUsers()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to retrieve users"})
 		return
@@ -20,7 +20,7 @@ func GetAllUsers(c *gin.Context) {
 	c.JSON(http.StatusOK, users)
 }
 
-func GetUser(c *gin.Context) {
+func GetUserById(c *gin.Context) {
 	var s user.Service
 
 	idParam := c.Param("id")
@@ -31,7 +31,7 @@ func GetUser(c *gin.Context) {
 	}
 
 	// Вызываем метод GetProduct, передавая ему ID товара
-	user, err := s.GetUser(id)
+	user, err := s.GetUserById(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
 		return
@@ -41,7 +41,7 @@ func GetUser(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
-func Create(c *gin.Context) {
+func CreateUser(c *gin.Context) {
 	var body string
 	var s user.Service
 
@@ -50,7 +50,7 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	err := s.Create(body)
+	err := s.CreateUser(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create user"})
 		return
@@ -59,7 +59,7 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "user created successfully"})
 }
 
-func Update(c *gin.Context) {
+func UpdateUserById(c *gin.Context) {
 	var body string
 	var s user.Service
 
@@ -68,7 +68,7 @@ func Update(c *gin.Context) {
 		return
 	}
 
-	err := s.Update(body)
+	err := s.UpdateUserById(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update user"})
 		return
@@ -77,7 +77,7 @@ func Update(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "user updated successfully"})
 }
 
-func Delete(c *gin.Context) {
+func DeleteUserById(c *gin.Context) {
 	var s user.Service
 
 	idParam := c.Param("id")
@@ -87,7 +87,7 @@ func Delete(c *gin.Context) {
 		return
 	}
 
-	err = s.Delete(id)
+	err = s.DeleteUserById(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete user"})
 		return

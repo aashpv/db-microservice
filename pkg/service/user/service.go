@@ -1,16 +1,16 @@
 package user
 
 import (
-	"FlowerHive/db-microservice/pkg/db/user"
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/db/user"
+	"github.com/aashpv/db-microservice/pkg/models"
 )
 
 type Service interface {
-	Create(body string) (err error)
-	Update(body string) (err error)
-	GetUser(id int) (user models.User, err error)
-	GetAllUser() (users []models.User, err error)
-	Delete(id int) (err error)
+	CreateUser(body string) (err error)
+	UpdateUserById(body string) (err error)
+	GetUserById(id int) (user models.User, err error)
+	GetAllUsers() (users []models.User, err error)
+	DeleteUserById(id int) (err error)
 }
 
 type service struct {

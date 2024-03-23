@@ -1,7 +1,7 @@
 package user
 
 import (
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/models"
 )
 
 func (p *postgres) GetAllUsers() (users []models.User, err error) {

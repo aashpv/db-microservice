@@ -1,17 +1,17 @@
 package order
 
 import (
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/models"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 type DataBase interface {
-	Create(order models.Order) (err error)
+	CreateOrder(order models.Order) (err error)
 	GetAllOrders() (orders []models.Order, err error)
 	GetOrderById(id int) (order models.Order, err error)
-	Update(order models.Order) (err error)
-	Delete(idOrder int) (err error)
+	UpdateOrderById(order models.Order) (err error)
+	DeleteOrderById(idOrder int) (err error)
 }
 
 type postgres struct {

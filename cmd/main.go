@@ -6,6 +6,8 @@
 
 package main
 
-func main() {
+import "github.com/aashpv/db-microservice/pkg/server"
 
+func main() {
+	server.InitServer()
 }

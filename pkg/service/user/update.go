@@ -1,11 +1,11 @@
 package user
 
 import (
-	"FlowerHive/db-microservice/pkg/models"
 	"encoding/json"
+	"github.com/aashpv/db-microservice/pkg/models"
 )
 
-func (s *service) Update(body string) (err error) {
+func (s *service) UpdateUserById(body string) (err error) {
 	var user models.User
 
 	err = json.Unmarshal([]byte(body), &user)
@@ -13,7 +13,7 @@ func (s *service) Update(body string) (err error) {
 		return
 	}
 
-	err = s.pgs.Update(user)
+	err = s.pgs.UpdateUserById(user)
 	if err != nil { // if err use log for writing in file
 		return
 	}

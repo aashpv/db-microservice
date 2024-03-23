@@ -1,17 +1,17 @@
 package product
 
 import (
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/models"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 type DataBase interface {
-	Create(product models.Product) (err error)
+	CreateProduct(product models.Product) (err error)
 	GetAllProducts() (products []models.Product, err error)
 	GetProductById(id int) (product models.Product, err error)
-	Update(product models.Product) (err error)
-	Delete(idProduct int) (err error)
+	UpdateProductById(product models.Product) (err error)
+	DeleteProductById(idProduct int) (err error)
 }
 
 type postgres struct {

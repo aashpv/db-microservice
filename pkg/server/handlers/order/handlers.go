@@ -1,7 +1,7 @@
 package order
 
 import (
-	"FlowerHive/db-microservice/pkg/service/order"
+	"github.com/aashpv/db-microservice/pkg/service/order"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -10,7 +10,7 @@ import (
 func GetAllOrders(c *gin.Context) {
 	var s order.Service
 
-	orders, err := s.GetAllOrder()
+	orders, err := s.GetAllOrders()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to retrieve orders"})
 		return
@@ -20,7 +20,7 @@ func GetAllOrders(c *gin.Context) {
 	c.JSON(http.StatusOK, orders)
 }
 
-func GetOrder(c *gin.Context) {
+func GetOrderById(c *gin.Context) {
 	var s order.Service
 
 	idParam := c.Param("id")
@@ -30,8 +30,7 @@ func GetOrder(c *gin.Context) {
 		return
 	}
 
-	// Вызываем метод GetProduct, передавая ему ID товара
-	order, err := s.GetOrder(id)
+	order, err := s.GetOrderById(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "order not found"})
 		return
@@ -41,7 +40,7 @@ func GetOrder(c *gin.Context) {
 	c.JSON(http.StatusOK, order)
 }
 
-func Create(c *gin.Context) {
+func CreateOrder(c *gin.Context) {
 	var body string
 	var s order.Service
 
@@ -50,7 +49,7 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	err := s.Create(body)
+	err := s.CreateOrder(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create order"})
 		return
@@ -59,7 +58,7 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "order created successfully"})
 }
 
-func Update(c *gin.Context) {
+func UpdateOrderById(c *gin.Context) {
 	var body string
 	var s order.Service
 
@@ -68,7 +67,7 @@ func Update(c *gin.Context) {
 		return
 	}
 
-	err := s.Update(body)
+	err := s.UpdateOrderById(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update order"})
 		return
@@ -77,7 +76,7 @@ func Update(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "order updated successfully"})
 }
 
-func Delete(c *gin.Context) {
+func DeleteOrderById(c *gin.Context) {
 	var s order.Service
 
 	idParam := c.Param("id")
@@ -87,7 +86,7 @@ func Delete(c *gin.Context) {
 		return
 	}
 
-	err = s.Delete(id)
+	err = s.DeleteOrderById(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete order"})
 		return

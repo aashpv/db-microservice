@@ -1,16 +1,16 @@
 package order
 
 import (
-	"FlowerHive/db-microservice/pkg/db/order"
-	"FlowerHive/db-microservice/pkg/models"
+	"github.com/aashpv/db-microservice/pkg/db/order"
+	"github.com/aashpv/db-microservice/pkg/models"
 )
 
 type Service interface {
-	Create(body string) (err error)
-	Update(body string) (err error)
-	GetOrder(id int) (order models.Order, err error)
-	GetAllOrder() (orders []models.Order, err error)
-	Delete(id int) (err error)
+	CreateOrder(body string) (err error)
+	UpdateOrderById(body string) (err error)
+	GetOrderById(id int) (order models.Order, err error)
+	GetAllOrders() (orders []models.Order, err error)
+	DeleteOrderById(id int) (err error)
 }
 
 type service struct {
