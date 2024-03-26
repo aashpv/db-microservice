@@ -1,16 +1,13 @@
-package order
+package handlers
 
 import (
-	"github.com/aashpv/db-microservice/pkg/service/order"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 )
 
-func GetAllOrders(c *gin.Context) {
-	var s order.Service
-
-	orders, err := s.GetAllOrders()
+func (h *handlers) GetAllOrders(c *gin.Context) {
+	orders, err := h.s.GetAllOrders()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to retrieve orders"})
 		return
@@ -20,9 +17,7 @@ func GetAllOrders(c *gin.Context) {
 	c.JSON(http.StatusOK, orders)
 }
 
-func GetOrderById(c *gin.Context) {
-	var s order.Service
-
+func (h *handlers) GetOrderById(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
@@ -30,7 +25,7 @@ func GetOrderById(c *gin.Context) {
 		return
 	}
 
-	order, err := s.GetOrderById(id)
+	order, err := h.s.GetOrderById(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "order not found"})
 		return
@@ -40,16 +35,15 @@ func GetOrderById(c *gin.Context) {
 	c.JSON(http.StatusOK, order)
 }
 
-func CreateOrder(c *gin.Context) {
+func (h *handlers) CreateOrder(c *gin.Context) {
 	var body string
-	var s order.Service
 
 	if err := c.Bind(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := s.CreateOrder(body)
+	err := h.s.CreateOrder(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create order"})
 		return
@@ -58,16 +52,15 @@ func CreateOrder(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "order created successfully"})
 }
 
-func UpdateOrderById(c *gin.Context) {
+func (h *handlers) UpdateOrderById(c *gin.Context) {
 	var body string
-	var s order.Service
 
 	if err := c.Bind(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := s.UpdateOrderById(body)
+	err := h.s.UpdateOrderById(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update order"})
 		return
@@ -76,9 +69,7 @@ func UpdateOrderById(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "order updated successfully"})
 }
 
-func DeleteOrderById(c *gin.Context) {
-	var s order.Service
-
+func (h *handlers) DeleteOrderById(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
@@ -86,7 +77,7 @@ func DeleteOrderById(c *gin.Context) {
 		return
 	}
 
-	err = s.DeleteOrderById(id)
+	err = h.s.DeleteOrderById(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete order"})
 		return

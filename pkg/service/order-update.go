@@ -1,19 +1,19 @@
-package product
+package service
 
 import (
 	"encoding/json"
 	"github.com/aashpv/db-microservice/pkg/models"
 )
 
-func (s *service) UpdateProductById(body string) (err error) {
-	var product models.Product
+func (s *service) UpdateOrderById(body string) (err error) {
+	var order models.Order
 
-	err = json.Unmarshal([]byte(body), &product)
+	err = json.Unmarshal([]byte(body), &order)
 	if err != nil {
 		return
 	}
 
-	err = s.pgs.UpdateProductById(product)
+	err = s.pgs.UpdateOrderById(order)
 	if err != nil { // if err use log for writing in file
 		return
 	}

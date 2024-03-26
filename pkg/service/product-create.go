@@ -1,19 +1,19 @@
-package user
+package service
 
 import (
 	"encoding/json"
 	"github.com/aashpv/db-microservice/pkg/models"
 )
 
-func (s *service) UpdateUserById(body string) (err error) {
-	var user models.User
+func (s *service) CreateProduct(body string) (err error) {
+	var product models.Product
 
-	err = json.Unmarshal([]byte(body), &user)
+	err = json.Unmarshal([]byte(body), &product)
 	if err != nil {
 		return
 	}
 
-	err = s.pgs.UpdateUserById(user)
+	err = s.pgs.CreateProduct(product)
 	if err != nil { // if err use log for writing in file
 		return
 	}

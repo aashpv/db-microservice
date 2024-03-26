@@ -1,9 +1,9 @@
-package user
+package service
 
 import "github.com/aashpv/db-microservice/pkg/models"
 
-func (s *service) GetUserById(id int) (user models.User, err error) {
-	user, err = s.pgs.GetUserById(id)
+func (s *service) GetOrderById(id int) (order models.Order, err error) {
+	order, err = s.pgs.GetOrderById(id)
 	if err != nil { // if err use log for writing in file
 		return
 	}
@@ -12,8 +12,8 @@ func (s *service) GetUserById(id int) (user models.User, err error) {
 	return
 }
 
-func (s *service) GetAllUsers() (users []models.User, err error) {
-	users, err = s.pgs.GetAllUsers()
+func (s *service) GetAllOrders() (orders []models.Order, err error) {
+	orders, err = s.pgs.GetAllOrders()
 	if err != nil { // if err use log for writing in file
 		return
 	}

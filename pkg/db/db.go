@@ -28,12 +28,11 @@ type postgres struct {
 }
 
 func New(dataSourceName string) (p DataBase, err error) {
+
 	db, err := sqlx.Open("postgres", dataSourceName)
 	if err != nil {
 		return nil, err
 	}
 
-	return &postgres{
-		db: db,
-	}, nil
+	return &postgres{db: db}, nil
 }

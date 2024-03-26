@@ -1,4 +1,4 @@
-package product
+package service
 
 import "github.com/aashpv/db-microservice/pkg/models"
 

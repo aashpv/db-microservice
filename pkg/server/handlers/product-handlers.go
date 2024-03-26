@@ -1,16 +1,13 @@
-package product
+package handlers
 
 import (
-	"github.com/aashpv/db-microservice/pkg/service/product"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 )
 
-func GetAllProducts(c *gin.Context) {
-	var s product.Service
-
-	products, err := s.GetAllProducts()
+func (h *handlers) GetAllProducts(c *gin.Context) {
+	products, err := h.s.GetAllProducts()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to retrieve products"})
 		return
@@ -20,9 +17,7 @@ func GetAllProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, products)
 }
 
-func GetProductById(c *gin.Context) {
-	var s product.Service
-
+func (h *handlers) GetProductById(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
@@ -31,7 +26,7 @@ func GetProductById(c *gin.Context) {
 	}
 
 	// Вызываем метод GetProduct, передавая ему ID товара
-	product, err := s.GetProductById(id)
+	product, err := h.s.GetProductById(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "product not found"})
 		return
@@ -41,16 +36,15 @@ func GetProductById(c *gin.Context) {
 	c.JSON(http.StatusOK, product)
 }
 
-func CreateProduct(c *gin.Context) {
+func (h *handlers) CreateProduct(c *gin.Context) {
 	var body string
-	var s product.Service
 
 	if err := c.Bind(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := s.CreateProduct(body)
+	err := h.s.CreateProduct(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create product"})
 		return
@@ -59,16 +53,15 @@ func CreateProduct(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "product created successfully"})
 }
 
-func UpdateProductById(c *gin.Context) {
+func (h *handlers) UpdateProductById(c *gin.Context) {
 	var body string
-	var s product.Service
 
 	if err := c.Bind(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := s.UpdateProductById(body)
+	err := h.s.UpdateProductById(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update product"})
 		return
@@ -77,9 +70,7 @@ func UpdateProductById(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "product updated successfully"})
 }
 
-func DeleteProductById(c *gin.Context) {
-	var s product.Service
-
+func (h *handlers) DeleteProductById(c *gin.Context) {
 	idParam := c.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
@@ -87,7 +78,7 @@ func DeleteProductById(c *gin.Context) {
 		return
 	}
 
-	err = s.DeleteProductById(id)
+	err = h.s.DeleteProductById(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete product"})
 		return

@@ -1,7 +1,7 @@
-package order
+package service
 
-func (s *service) DeleteOrderById(id int) (err error) {
-	err = s.pgs.DeleteOrderById(id)
+func (s *service) DeleteUserById(id int) (err error) {
+	err = s.pgs.DeleteUserById(id)
 	if err != nil { // if err use log for writing in file
 		return
 	}

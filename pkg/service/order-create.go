@@ -1,11 +1,11 @@
-package order
+package service
 
 import (
 	"encoding/json"
 	"github.com/aashpv/db-microservice/pkg/models"
 )
 
-func (s *service) UpdateOrderById(body string) (err error) {
+func (s *service) CreateOrder(body string) (err error) {
 	var order models.Order
 
 	err = json.Unmarshal([]byte(body), &order)
@@ -13,7 +13,7 @@ func (s *service) UpdateOrderById(body string) (err error) {
 		return
 	}
 
-	err = s.pgs.UpdateOrderById(order)
+	err = s.pgs.CreateOrder(order)
 	if err != nil { // if err use log for writing in file
 		return
 	}
