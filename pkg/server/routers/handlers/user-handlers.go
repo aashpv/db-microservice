@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/aashpv/db-microservice/pkg/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -37,14 +38,14 @@ func (h *handlers) GetUserById(c *gin.Context) {
 }
 
 func (h *handlers) CreateUser(c *gin.Context) {
-	var body string
+	var user models.User
 
-	if err := c.Bind(&body); err != nil {
+	if err := c.Bind(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := h.s.CreateUser(body)
+	err := h.s.CreateUser(user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create user"})
 		return
@@ -54,14 +55,18 @@ func (h *handlers) CreateUser(c *gin.Context) {
 }
 
 func (h *handlers) UpdateUserById(c *gin.Context) {
-	var body string
+	var user models.User
 
-	if err := c.Bind(&body); err != nil {
+	if err := c.Bind(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := h.s.UpdateUserById(body)
+	idStr := c.Param("id")
+	idInt, err := strconv.Atoi(idStr)
+	user.ID = idInt
+
+	err = h.s.UpdateUserById(user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update user"})
 		return

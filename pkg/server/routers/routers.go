@@ -47,7 +47,7 @@ func (r *routers) NewRouter() *gin.Engine {
 	engine.POST("/user/create", r.hrs.CreateUser)
 
 	// Маршрут для обновления информации о пользователе
-	engine.PUT("/user/:id/update", r.hrs.UpdateUserById)
+	engine.POST("/user/:id/update", r.hrs.UpdateUserById)
 
 	// Маршрут для удаления пользователя
 	engine.DELETE("/user/:id/delete", r.hrs.DeleteUserById)

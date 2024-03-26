@@ -3,6 +3,7 @@ package db
 import (
 	"github.com/aashpv/db-microservice/pkg/models"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 type DataBase interface {
