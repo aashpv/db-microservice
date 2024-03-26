@@ -1,4 +1,4 @@
-package user
+package db
 
 import (
 	"github.com/aashpv/db-microservice/pkg/models"
