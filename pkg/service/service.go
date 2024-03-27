@@ -6,8 +6,8 @@ import (
 )
 
 type Service interface {
-	CreateOrder(body string) (err error)
-	UpdateOrderById(body string) (err error)
+	CreateOrder(order models.Order) (err error)
+	UpdateOrderById(order models.Order) (err error)
 	GetOrderById(id int) (order models.Order, err error)
 	GetAllOrders() (orders []models.Order, err error)
 	DeleteOrderById(id int) (err error)

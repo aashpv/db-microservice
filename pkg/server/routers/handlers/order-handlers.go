@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/aashpv/db-microservice/pkg/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -36,14 +37,14 @@ func (h *handlers) GetOrderById(c *gin.Context) {
 }
 
 func (h *handlers) CreateOrder(c *gin.Context) {
-	var body string
+	var order models.Order
 
-	if err := c.Bind(&body); err != nil {
+	if err := c.Bind(&order); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := h.s.CreateOrder(body)
+	err := h.s.CreateOrder(order)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create order"})
 		return
@@ -53,14 +54,14 @@ func (h *handlers) CreateOrder(c *gin.Context) {
 }
 
 func (h *handlers) UpdateOrderById(c *gin.Context) {
-	var body string
+	var order models.Order
 
-	if err := c.Bind(&body); err != nil {
+	if err := c.Bind(&order); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err := h.s.UpdateOrderById(body)
+	err := h.s.UpdateOrderById(order)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update order"})
 		return
