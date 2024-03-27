@@ -32,7 +32,7 @@ func (r *routers) NewRouter() *gin.Engine {
 	engine.POST("/product/create", r.hrs.CreateProduct)
 
 	// Маршрут для обновления информации о товаре
-	engine.PUT("/product/:id/update", r.hrs.UpdateProductById)
+	engine.POST("/product/:id/update", r.hrs.UpdateProductById)
 
 	// Маршрут для удаления товара
 	engine.DELETE("/product/:id/delete", r.hrs.DeleteProductById)
