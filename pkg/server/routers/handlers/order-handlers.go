@@ -61,7 +61,11 @@ func (h *handlers) UpdateOrderById(c *gin.Context) {
 		return
 	}
 
-	err := h.s.UpdateOrderById(order)
+	idStr := c.Param("id")
+	idInt, err := strconv.Atoi(idStr)
+	order.ID = idInt
+
+	err = h.s.UpdateOrderById(order)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update order"})
 		return

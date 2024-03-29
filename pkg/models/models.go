@@ -1,7 +1,5 @@
 package models
 
-import "time"
-
 type User struct {
 	ID       int    `json:"id" db:"id"`
 	Username string `json:"username" db:"username"`
@@ -18,7 +16,6 @@ type Product struct {
 	Price       float64 `json:"price" db:"price"`
 	Quantity    int     `json:"quantity" db:"quantity"`
 	CategoryID  int     `json:"id_category" db:"id_category"`
-	//ImageURL    string  `json:"image_url" db:"image_url"`
 }
 
 type Category struct {
@@ -27,13 +24,12 @@ type Category struct {
 }
 
 type Order struct {
-	ID          int       `json:"id" db:"id"`
-	Date        time.Time `json:"date" db:"date"`
-	Status      string    `json:"status" db:"status"`
-	ProductID   int       `json:"id_product" db:"id_product"`
-	UserID      int       `json:"id_user" db:"id_user"`
-	Address     string    `json:"address" db:"address"`
-	OtherNumber string    `json:"other_number" db:"other_number"`
-	OtherName   string    `json:"other_name" db:"other_name"`
-	//DeliveryDate     time.Time    `json:"delivery_date" db:"delivery_date"`
+	ID          int    `json:"id" db:"id"`
+	Date        string `json:"date" db:"date"`
+	Status      string `json:"status" db:"status"`
+	ProductID   int    `json:"id_product" db:"id_product"`
+	UserID      int    `json:"id_user" db:"id_user"`
+	Address     string `json:"address" db:"address"`
+	OtherNumber string `json:"other_number" db:"other_number"`
+	OtherName   string `json:"other_name" db:"other_name"`
 }
