@@ -18,7 +18,7 @@ type Product struct {
 	Price       float64 `json:"price" db:"price"`
 	Quantity    int     `json:"quantity" db:"quantity"`
 	CategoryID  int     `json:"id_category" db:"id_category"`
-	ImageURL    string  `json:"image_url" db:"image_url"`
+	//ImageURL    string  `json:"image_url" db:"image_url"`
 }
 
 type Category struct {
